@@ -12,4 +12,4 @@ Primero debemos comenzar con el caso trivial, en que la raíz del árbol es `nul
 Para el caso general, podemos reconocer que es una variación de recorrer el árbol en orden (_in order traversal_). Consideremos el ejemplo mostrado en la figura 1.
 
 
-![Alt text](../imgs/binary_tree/zigzag_s1.drawio.png?raw=true "Optional Title")
+![Alt text](https://raw.githubusercontent.com/dpalmasan/code-challenges/master/imgs/binary_tree/zigzag_s1.png "Optional Title")
