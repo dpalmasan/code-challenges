@@ -19,7 +19,7 @@ En `BST` podemos visitar los nodos del árbol por nivel, partiendo desde la raí
 
 ![Alt text](https://raw.githubusercontent.com/dpalmasan/code-challenges/master/imgs/binary_tree/zigzag_steps.gif "BST")
 
-Básicamente, debemos expandir los nodos en el órden en que se van descubriendo, y generar la lista de resultados y alternar de acuerdo al nivel. Como abstracción, supongamos que un nodo tiene el nivel al que pertenece, comenzando desde el nivel 1. Para procesar los nodos en el orden en que se descubren, necesitamos una estructura de datos tipo `FIFO` (_first in first out`), por lo cual utilizaremos una cola (`queue`). 
+Básicamente, debemos expandir los nodos en el órden en que se van descubriendo, y generar la lista de resultados y alternar de acuerdo al nivel. Como abstracción, supongamos que un nodo tiene el nivel al que pertenece, comenzando desde el nivel 1. Para procesar los nodos en el orden en que se descubren, necesitamos una estructura de datos tipo `FIFO` (_first in first out_), por lo cual utilizaremos una cola (`queue`). 
 
 
 Primero debemos chequear si la raíz del árbol es `null`:
