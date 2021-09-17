@@ -9,9 +9,9 @@ def zigzag_level_order(root: Optional[TreeNode]) -> List[List[int]]:
     depth of the tree, in Zig-Zag order, starting from left to right
     and alternating.
 
-    :param root: [description]
+    :param root: Root of the binary tree
     :type root: Optional[TreeNode]
-    :return: [description]
+    :return: A list of list of nodes in each depth.
     :rtype: List[List[int]]
     """
     if root is None:
