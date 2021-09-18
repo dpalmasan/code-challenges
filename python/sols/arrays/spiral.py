@@ -121,3 +121,53 @@ def spiral(n: int) -> List[List[int]]:
     output = [[0]*n for _ in range(n)]
     recursive_traversal(output, 0, n, 1)
     return output
+
+
+
+def invalid_position(output: List[List[int]], row: int, col: int) -> bool:
+    """Check if position is valid, i.e. non out of limits and non visited.
+
+    :param output: Matrix
+    :type output: List[List[int]]
+    :param row: Current row
+    :type row: int
+    :param col: Current col
+    :type col: int
+    :return: True if it is invalid, False otherwise
+    :rtype: bool
+    """
+    n = len(output)
+    return row < 0 or col < 0 or row >= n or col >= n or output[row][col] != 0
+
+
+def iterative_spiral(n: int) -> List[List[int]]:
+    """Create an spiral square matrix.
+
+    :param n: Dimension of the matrix
+    :type n: int
+    :return: Matrix of integers
+    :rtype: List[List[int]]
+    """
+    if n <= 0:
+        raise ValueError(f"n should be greater than 0, you provided: {n}")
+
+    dir_row = (0, 1, 0, -1)
+    dir_col = (1, 0, -1, 0)
+    cur_dir = 0
+    val = 1
+    row = 0
+    col = 0
+    limit = n*n
+    output = [[0]*n for _ in range(n)]
+    while val <= limit:
+        output[row][col] = val
+        row += dir_row[cur_dir]
+        col += dir_col[cur_dir]
+        if invalid_position(output, row, col):
+            row -= dir_row[cur_dir]
+            col -= dir_col[cur_dir]
+            cur_dir = (cur_dir + 1) % 4
+            row += dir_row[cur_dir]
+            col += dir_col[cur_dir]
+        val += 1
+    return output
