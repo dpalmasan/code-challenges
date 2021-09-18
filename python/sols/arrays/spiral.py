@@ -3,7 +3,7 @@ from typing import List
 
 
 def traversal(output: List[List[int]], pos: int, n: int, start: int) -> int:
-    """Traverse boundaries of an nxn matrix.
+    """Traverse boundaries of an nxn matrix ``O(4*n)``.
 
     :param output: Matrix to be filled
     :type output: List[List[int]]
@@ -33,6 +33,42 @@ def traversal(output: List[List[int]], pos: int, n: int, start: int) -> int:
         start += 1
 
     return start
+
+
+def optimized_traversal(output: List[List[int]], pos: int, n: int, start: int) -> int:
+    """Traverse boundaries of an nxn matrix O(n).
+
+    :param output: Matrix to be filled
+    :type output: List[List[int]]
+    :param pos: Starting position (pos, pos)
+    :type pos: int
+    :param n: Size of the matrix to traverse
+    :type n: int
+    :param start: Starting value
+    :type start: int
+    :return: End value of the traversal
+    :rtype: int
+    """
+    offset = n - pos - 1
+    top_left_corner = start
+    top_right_corner = top_left_corner + offset
+    bottom_right_corner = top_right_corner + offset
+    bottom_left_corner = bottom_right_corner + offset
+    output[pos][pos] = top_left_corner
+    output[pos][n - 1] = top_right_corner
+    output[n - 1][n - 1] = bottom_right_corner
+    output[n - 1][pos] = bottom_left_corner
+    for i in range(pos + 1, n - 1):
+        top_left_corner += 1
+        top_right_corner += 1
+        bottom_right_corner += 1
+        bottom_left_corner += 1
+        output[pos][i] = top_left_corner
+        output[i][n - 1] = top_right_corner
+        output[n - 1][n - i + pos - 1] = bottom_right_corner
+        output[n - i + pos - 1][pos] = bottom_left_corner
+
+    return bottom_left_corner + 1
 
 
 def recursive_traversal(output: List[List[int]], pos, n, start):
@@ -68,7 +104,7 @@ def recursive_traversal(output: List[List[int]], pos, n, start):
         return
 
     # Fill boundaries
-    start = traversal(output, pos, n, start)
+    start = optimized_traversal(output, pos, n, start)
     recursive_traversal(output, pos + 1, n - 1, start)
 
 
