@@ -10,7 +10,7 @@ Se debe observar que lo que se genera es una matriz en espiral que tiene un punt
 
 Una matrz en espiral siempre comienza con `1` y termina con el número total de elementos `nxn`.
 
-### Caso General
+### Solución Recursiva
 
 Podemos generalizar el problema. En lugar rellenar con valores la matriz completa, podemos considerar llenar sólo los bordes.  
 
@@ -68,7 +68,7 @@ algoritmo recursive-traversal:
     return
 
   # Llenar bordes
-  start = optimized_traversal(m, pos, n, start)
+  start = traversal(m, pos, n, start)
 
   # Resolveer subproblema
   recursive_traversal(m, pos + 1, n - 1, start)
@@ -89,3 +89,37 @@ algoritmo spiral
   recursive_traversal(m, 0, n, 1)
   return m
 ```
+
+### Solución Iterativa
+
+Por otro lado, también podemos utilizar un enfoque _greedy_, en el que visitamos cada celda y cambiamos la dirección de movimiento a medida que encontramos algún problema (i.e. fuera de límites, o celda ya fue visitada). El algoritmo sería como sigue:
+
+```
+algoritmo spiral-iterativo
+  entrada: n: int
+  salida: m: int[][]
+  
+  # Para entradas inválidas arrojamos error
+  if n <= 0:
+    throw Exception()
+
+  m = Inicializar Matriz de nxn
+  dir_row = (0, 1, 0, -1)
+  dir_col = (1, 0, -1, 0)
+  dir = 0
+  val = 1
+  while val <= n*n:
+    m[row][col] = val
+    row += dir_row[cur_dir]
+    col += dir_col[cur_dir]
+    if invalid_position(m, row, col):
+      row -= dir_row[cur_dir]
+      col -= dir_col[cur_dir]
+      cur_dir = (cur_dir + 1) % 4
+      row += dir_row[cur_dir]
+      col += dir_col[cur_dir]
+    val += 1
+  return m
+```
+
+Este enfoque es menos propenso a errores al ser programado.
