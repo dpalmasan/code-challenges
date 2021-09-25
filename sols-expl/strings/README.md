@@ -1,6 +1,6 @@
 # Strings
 
-## Look and Say
+## Look and Say [#5][i5]
 
 ### Entendiendo el problema
 
@@ -105,7 +105,7 @@ El dígito máximo que puede existir en la salida, comenzando desde el string `1
 
 Finalmente, la única secuencia que no cambia es `22`, porque se lee como _dos dos_ que es `22`.
 
-## One Edit Apart (#8)
+## One Edit Apart [#8][i8]
 
 La primera observación que hay que tener en este problema, es que si el largo de los strings difiere en 2 o más, significa que se necesita más de una edición para convertir `s1` en `s2`, por lo tanto para este caso siempre deberíamos retornar `false`. Por ejemplo si consideramos los strings `"c"` y `"cat"`, necesitamos o insertar dos caracteres en `"c"` o eliminar dos caracteres en `"cat"`. Esta regla nos da una idea de cómo podemos abordar el problema, debido a la simetría de las operaciones.
 
@@ -151,3 +151,6 @@ algoritmo one_edit_apart:
         s1_idx += 1
     return diffs <= 1
 ```
+
+[i5]: https://github.com/dpalmasan/code-challenges/issues/5
+[i8]: https://github.com/dpalmasan/code-challenges/issues/8

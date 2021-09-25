@@ -1,6 +1,6 @@
 # Árboles Binarios (Binary Trees)
 
-## Zig-Zag Traversal
+## Zig-Zag Traversal [#11][i11]
 
 ### Caso de Borde
 
@@ -114,3 +114,5 @@ algoritmo ZigZag-Traversal:
     result.append(nodes_in_level)
   return result
 ```
+
+[i11]: https://github.com/dpalmasan/code-challenges/issues/11
