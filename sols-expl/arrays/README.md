@@ -1,6 +1,6 @@
 # Arreglos (Arrays)
 
-## Matriz en Espiral
+## Matriz en Espiral ([#3][i3])
 
 ### Entendiendo el problema
 
@@ -123,3 +123,6 @@ algoritmo spiral-iterativo
 ```
 
 Este enfoque es menos propenso a errores al ser programado.
+
+
+[i3]: https://github.com/dpalmasan/code-challenges/issues/3
