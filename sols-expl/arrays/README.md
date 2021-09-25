@@ -124,5 +124,68 @@ algoritmo spiral-iterativo
 
 Este enfoque es menos propenso a errores al ser programado.
 
+## Suma de diferencias absolutas [#10][i10]
+
+### Enfoque Naïve
+
+Podemos resolver el problema a fuerza bruta, iterando por cada elemento para calcular el elemento en el `array` de salida. El algoritmo sería:
+
+```
+algoritmo naive-sum-abs-diff
+  entrada: nums: int[]
+  salida: result: int[]
+  
+  N = nums.length
+  result = new int[N]
+  for i = 0 to N - 1:
+    for j = 0 to N - 1:
+      if i == j:
+        continue
+      result[i] += |nums[i] - nums[j]| 
+
+  return result
+```
+
+Este algoritmo tiene una complejidad `O(n^2)`. 
+
+* ¿Podemos hacerlo más eficiente?
+* ¿Estamos utilizando toda la información?
+
+### Enfoque optimizado
+
+¿Qué información extra tenemos en el problema? Se dice que el `array` se encuentra ordenado, ¿Se puede usar esta información para hacer un algoritmo más eficiente?
+
+Probemos con el siguiente ejemplo: `[1, 5, 10, 13]`. El resultado debiese ser:
+
+* `result[0] = |1 - 5| + |1 - 10| + |1 - 13| = 25`
+* `result[1] = |5 - 1| + |5 - 10| + |5 - 13| = 17`
+* `result[2] = |10 - 1| + |10 - 5| + |10 - 13| = 17`
+* `result[3] = |13 - 1| + |13 - 5| + |13 - 10| = 23`
+
+También tenemos que la suma total de los elementos es `1 + 5 + 10 + 13 = 29`, y la suma acumulada es `[0, 1, 6, 16, 29]`. Por otro lado la suma de las diferencias absolutas siempre será `<=` que la suma de los elementos, ya que los elementos son todos positivos. Como los elementos están ordenados de forma creciente, desde `0` hasta el elemento `i`, hemos agregado a la suma `i * nums[i]`, por ejemplo en el caso `results[2]`, tenemos `|10 - 1| + |10 -5| = 10 - 1 + 10 - 5 = 2 * 10 - 1 - 5`. También podemos observar que estamos restando la suma acumulada hasta el elemento `i`, siguiendo el ejemplo tenemos  `|10 - 1| + |10 -5| = 2 * 10 - (1 + 5)`. También observamos que desde `i` en adelante estamos quitando `n - i - 1` veces el elemento `nums[i]`. Por ejemplo, para el caso `i = 0`, tenemos `|1 - 5| + |1 - 10| + |1 - 13| = 5 + 10 + 13 - 1 - 1 - 1 = 5 + 10 + 13 - (4 - 0 - 1) * 1`. El término `5 + 10 + 13` es la suma acumulada desde `i + 1` en adelante. Finalmente, generalizando llegamos a:
+
+* `result[i] = cumsum[n] - cumsum[i + 1] - nums[i] * (n - i - 1) - cumsum[i] + nums[i] * i`
+
+Por lo tanto, llegamos al siguiente algoritmo:
+
+```
+algoritmo sum-abs-diff
+  entrada: nums: int[]
+  salida: result: int[]
+  
+  # cumsum se inicializa con ceros
+  cumsum = new int[N + 1]
+  for i in 1 to N:
+    cumsum[i] = cumsum[i - 1] + nums[i - 1]
+
+  result = new int[nums.length]
+  for i = 0 to N - 1:
+    result[i] = cumsum[n] - cumsum[i + 1] - nums[i] * (n - i - 1) - cumsum[i] + nums[i] * i
+
+  return result
+```
+
+En este caso podemos observar un intercambio memoria/tiempo de ejecución, ya que ahora la complejidad en tiempo de ejecución es `O(N)`, y la complejidad en memoria es también `O(N)` ya que necesitamos pre-calcular la suma acumulada.
 
 [i3]: https://github.com/dpalmasan/code-challenges/issues/3
+[i10]: https://github.com/dpalmasan/code-challenges/issues/10
