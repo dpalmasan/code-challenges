@@ -35,7 +35,9 @@ def traversal(output: List[List[int]], pos: int, n: int, start: int) -> int:
     return start
 
 
-def optimized_traversal(output: List[List[int]], pos: int, n: int, start: int) -> int:
+def optimized_traversal(
+    output: List[List[int]], pos: int, n: int, start: int
+) -> int:
     """Traverse boundaries of an nxn matrix O(n).
 
     :param output: Matrix to be filled
@@ -118,10 +120,9 @@ def spiral(n: int) -> List[List[int]]:
     """
     if n <= 0:
         raise ValueError(f"n should be greater than 0, you provided: {n}")
-    output = [[0]*n for _ in range(n)]
+    output = [[0] * n for _ in range(n)]
     recursive_traversal(output, 0, n, 1)
     return output
-
 
 
 def invalid_position(output: List[List[int]], row: int, col: int) -> bool:
@@ -157,8 +158,8 @@ def iterative_spiral(n: int) -> List[List[int]]:
     val = 1
     row = 0
     col = 0
-    limit = n*n
-    output = [[0]*n for _ in range(n)]
+    limit = n * n
+    output = [[0] * n for _ in range(n)]
     while val <= limit:
         output[row][col] = val
         row += dir_row[cur_dir]

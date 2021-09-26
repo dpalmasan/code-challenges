@@ -1,3 +1,4 @@
+"""Zig-zag traversal tests."""
 from sols.binary_tree.zigzag_traversal import zigzag_level_order
 from sols.binary_tree.binary_tree import paren_notation_to_binary_tree
 

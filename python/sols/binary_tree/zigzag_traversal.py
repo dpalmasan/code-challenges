@@ -1,3 +1,4 @@
+"""Zig-zag traversal implementation."""
 from typing import List, Optional
 from sols.binary_tree.binary_tree import TreeNode
 
@@ -16,12 +17,12 @@ def zigzag_level_order(root: Optional[TreeNode]) -> List[List[int]]:
     """
     if root is None:
         return []
-    
+
     queue = []
     queue.append((root, 0))
     result = []
     left = True
-    nodes_in_level = []
+    nodes_in_level: List[int] = []
     curr_level = 0
     while queue:
         node, level = queue.pop()
