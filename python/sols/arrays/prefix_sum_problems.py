@@ -1,3 +1,4 @@
+"""Pre-fix problems."""
 from typing import List
 
 
@@ -15,13 +16,17 @@ def sum_absolute_differences(nums: List[int]) -> List[int]:
     :return: Result with sum of absolute differences
     :rtype: List[int]
     """
-    n = len(nums)
-    total_sum = sum(nums)  
-    result = [0]*n
+    total_sum = sum(nums)
+    result = [0] * len(nums)
     cum_sum = 0
     cum_sum_next = 0
-    for i in range(n):
-        cum_sum_next += nums[i]
-        result[i] = total_sum - cum_sum_next - nums[i]*(n - i - 1) + nums[i]*i - cum_sum
-        cum_sum += nums[i]
+    for i, el in enumerate(nums):
+        cum_sum_next += el
+        result[i] = (
+            total_sum
+            - cum_sum_next
+            + el * ((i << 1) - len(nums) + 1)
+            - cum_sum
+        )
+        cum_sum += el
     return result

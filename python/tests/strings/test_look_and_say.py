@@ -1,7 +1,9 @@
+"""Look and say tests."""
 from sols.strings.look_and_say import next_sequence
 
 
 def test_next_sequence():
+    """Test sample cases."""
     assert next_sequence("1") == "11"
     assert next_sequence("11") == "21"
     assert next_sequence("21") == "1211"

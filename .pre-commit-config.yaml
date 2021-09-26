@@ -1,0 +1,26 @@
+fail_fast: false
+repos:
+-   repo: https://github.com/psf/black
+    rev: 20.8b1
+    hooks:
+    -    id: black
+         stages: [commit]
+         language_version: python3
+-   repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v1.2.3
+    hooks:
+    -   id: flake8
+        stages: [commit]
+        language_version: python3
+    -   id: check-docstring-first
+        stages: [commit]
+-   repo: git://github.com/not01/pre-commit-mirrors-pydocstyle
+    rev: v2.1.1
+    hooks:
+    -   id: pydocstyle
+        stages: [commit]
+-   repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v0.790
+    hooks:
+    -   id: mypy
+        stages: [commit]

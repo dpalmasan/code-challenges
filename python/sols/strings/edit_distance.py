@@ -1,5 +1,6 @@
 """Edit distance implementation module."""
 
+
 def one_edit_apart(s1: str, s2: str) -> bool:
     """Check if two strings are one edit apart.
 
