@@ -16,14 +16,12 @@ def sum_absolute_differences(nums: List[int]) -> List[int]:
     :rtype: List[int]
     """
     n = len(nums)
-    prefix = [0]*(n + 1)
-    for i in range(1, len(nums) + 1):
-        prefix[i] = prefix[i - 1] + nums[i - 1]
-        
+    total_sum = sum(nums)  
     result = [0]*n
+    cum_sum = 0
+    cum_sum_next = 0
     for i in range(n):
-        result[i] = (
-            prefix[n] - prefix[i + 1] - nums[i]*(n - i - 1)
-            - prefix[i] + nums[i]*i
-        )
+        cum_sum_next += nums[i]
+        result[i] = total_sum - cum_sum_next - nums[i]*(n - i - 1) + nums[i]*i - cum_sum
+        cum_sum += nums[i]
     return result

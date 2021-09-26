@@ -187,5 +187,31 @@ algoritmo sum-abs-diff
 
 En este caso podemos observar un intercambio memoria/tiempo de ejecución, ya que ahora la complejidad en tiempo de ejecución es `O(N)`, y la complejidad en memoria es también `O(N)` ya que necesitamos pre-calcular la suma acumulada.
 
+### Enfoque optimizado en memoria
+
+Tomando ideas del enfoque optimizado, podemos darnos cuenta que no necesitamos pre-calcular la suma acumulada, y podemos hacer el cálculo _in place_ si modificamos el algoritmo como sigue:
+
+```
+algoritmo sum-abs-diff-mem-opt
+  entrada: nums: int[]
+  salida: result: int[]
+  
+  total_sum = 0
+  for i in 1 to N:
+    total_sum += nums[i]
+
+  result = new int[nums.length]
+  cum_sum = 0
+  cum_sum_next = 0
+  for i = 0 to N - 1:
+    cum_sum_next += nums[i]
+    result[i] = total_sum - cum_sum_next - nums[i] * (n - i - 1) - cum_sum + nums[i] * i
+    cum_sum += nums[i]
+
+  return result
+```
+
+En este caso, la complejidad en tiempo es `O(N)`, pero se redujo la complejidad en memoria a `O(1)`.
+
 [i3]: https://github.com/dpalmasan/code-challenges/issues/3
 [i10]: https://github.com/dpalmasan/code-challenges/issues/10
