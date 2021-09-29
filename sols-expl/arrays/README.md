@@ -223,10 +223,10 @@ Primero debemos pensar, qué pasa si `k >= nums.length`. En este caso, como son 
 Para simplificar el problema, podemos crear una copia del `array` original, y el algoritmo quedaría como sigue:
 
 ```
-algoritmo rotate-o_n
+algoritmo rotate-naive
   entrada: nums: int[], k
   
-  k' = k % len(nums)
+  k' = k % nums.length
   if k' == 0:
       return
   backup = new int[nums.length]
@@ -241,6 +241,38 @@ algoritmo rotate-o_n
 ```
 
 Este algoritmo tiene una complejidad de `O(n)` en tiempo de ejecución y `O(n)` en memoria. ¿Se puede hacer en `O(1)` en memoria?
+
+### Enfoque `O(1)` en memoria
+
+Este enfoque utiliza el patrón de doble-puntero. Tomando ideas del enfoque previo (como que ya conocemos las posiciones finales de cada elemento), guardamos la posición anterior y vamos actualizando los elementos del `array` haciendo `n` movimientos donde `n` es el tamaño del `array`. Debemos observar que podemos encontrarnos con ciclos a medida que vamos recorriendo el array, en este caso, tenemos un marcador que indica la primera posición visitada antes de hacer un ciclo. Un ejemplo de este enfoque puede verse a continuación:
+
+![Alt text](https://gist.githubusercontent.com/dpalmasan/103d61ae06cfd3e7dee7888b391c1792/raw/925126a392f97de682095e367a24776c1d3feff9/rotate.gif "Enfoque óptimo en memoria")
+
+El algoritmo es el que sigue:
+
+```
+algoritmo rotate-mem-opt
+  entrada: nums: int[], k
+  
+  k' = k % nums.length
+  if k' == 0:
+      return
+    i1 = 0
+  backup_val = nums[0]
+  loop_start = 0
+  for i = 0 to nums.length - 1:
+    i2 = (i1 + k') % nums.length
+    tmp = nums[i2]
+    nums[i2] = backup_val
+    backup_val = tmp
+    i1 = i2
+    if i1 == loop_start:
+        loop_start += 1
+        i1 = loop_start % nums.length
+        backup_val = nums[i1]
+```
+
+Este algoritmo es `O(n)` en tiempo de ejecución y `O(1)` en memoria.
 
 
 [i3]: https://github.com/dpalmasan/code-challenges/issues/3
