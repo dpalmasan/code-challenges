@@ -213,5 +213,36 @@ algoritmo sum-abs-diff-mem-opt
 
 En este caso, la complejidad en tiempo es `O(N)`, pero se redujo la complejidad en memoria a `O(1)`.
 
+
+## Rotar array `k` veces hacia la derecha [#18][i18]
+
+### Enfoque Simple
+
+Primero debemos pensar, qué pasa si `k >= nums.length`. En este caso, como son rotaciones, tenemos básicamente ciclos que se repetirán. Para ello, es común calcular el módulo. Por ejemplo `k % nums.length` sería igual a `k` si `k < nums.length`, sería igual a `0` si `k == nums.length` y sería igual a `3` si `k == nums.length + 3`. Por lo tanto, podemos definir `k' = k % nums.length`. Como debemos mover al menos todos los elementos del `array` `k` veces, la complejidad en tiempo de ejecución tiene como límite inferior ser `O(n)`.
+
+Para simplificar el problema, podemos crear una copia del `array` original, y el algoritmo quedaría como sigue:
+
+```
+algoritmo rotate-o_n
+  entrada: nums: int[], k
+  
+  k' = k % len(nums)
+  if k' == 0:
+      return
+  backup = new int[nums.length]
+
+  # Se asume índices comienzan de 0
+  for i = 0 to nums.length - 1:
+    backup[i] = nums[i]
+
+  for i = 0 to nums.length - 1:
+      new_idx = (i + k') % nums.length
+      nums[new_idx] = backup[i]
+```
+
+Este algoritmo tiene una complejidad de `O(n)` en tiempo de ejecución y `O(n)` en memoria. ¿Se puede hacer en `O(1)` en memoria?
+
+
 [i3]: https://github.com/dpalmasan/code-challenges/issues/3
 [i10]: https://github.com/dpalmasan/code-challenges/issues/10
+[i18]: https://github.com/dpalmasan/code-challenges/issues/18
