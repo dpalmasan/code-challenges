@@ -11,13 +11,13 @@ Primero debemos comenzar con el caso trivial, en que la raíz del árbol es `nul
 
 Para el caso general, podemos reconocer que es una variación de recorrer el árbol en post-orden (_post order traversal_). Consideremos el ejemplo mostrado en la siguiente figura:
 
-![Alt text](https://raw.githubusercontent.com/dpalmasan/code-challenges/master/imgs/binary_tree/zigzag_s1.png "Ejemplo BT")
+![Alt text](https://gist.githubusercontent.com/dpalmasan/103d61ae06cfd3e7dee7888b391c1792/raw/611501be9fe2d11dad856cfa8fbe62f6eb1d3086/zigzag_s1.png "Ejemplo BT")
 
 En este ejemplo, primero visitaríamos la raíz del árbol (nodo cuyo valor es `3`). Luego _expandiríamos_ este nodo, y podríamos visitar el nodo `9` o el nodo `20`. Sin embargo, como visitamos los nodos en zig-zag, el órden sería `[20, 9]` en el nivel 2. Debemos tener en cuenta, que cada nodo a visitar se expande y deberán visitarse los hijos izquierdo y derecho de cada nodo en cada paso. Si nos detenemos a pensar, este es un caso de búsqueda en anchura o `BST` (_Breadth First Search_).
 
 En `BST` podemos visitar los nodos del árbol por nivel, partiendo desde la raíz hasta los niveles más profundos, como se muestra en la siguiente animación:
 
-![Alt text](https://raw.githubusercontent.com/dpalmasan/code-challenges/master/imgs/binary_tree/zigzag_steps.gif "BST")
+![Alt text](https://gist.githubusercontent.com/dpalmasan/103d61ae06cfd3e7dee7888b391c1792/raw/611501be9fe2d11dad856cfa8fbe62f6eb1d3086/zigzag_steps.gif "BST")
 
 Básicamente, debemos expandir los nodos en el órden en que se van descubriendo, y generar la lista de resultados y alternar de acuerdo al nivel. Como abstracción, supongamos que un nodo tiene el nivel al que pertenece, comenzando desde el nivel 1. Para procesar los nodos en el orden en que se descubren, necesitamos una estructura de datos tipo `FIFO` (_first in first out_), por lo cual utilizaremos una cola (`queue`). 
 
