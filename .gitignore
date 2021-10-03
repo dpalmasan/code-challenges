@@ -1,3 +1,6 @@
 # Python stuff
 __pycache__
 .python-version
+
+# Things for dev I'd like to ignore
+dev/
