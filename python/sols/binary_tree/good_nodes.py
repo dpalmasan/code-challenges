@@ -2,12 +2,12 @@
 from sols.binary_tree.binary_tree import TreeNode
 
 
-def good_nodes(self, root: TreeNode) -> int:
+def good_nodes(root: TreeNode) -> int:
     """Count number of good nodes in a Binary Tree.
 
-    :param root: [description]
+    :param root: Root of the Binary Tree
     :type root: TreeNode
-    :return: [description]
+    :return: Number of good nodes
     :rtype: int
     """
     good_nodes = 1
@@ -32,12 +32,12 @@ def good_nodes(self, root: TreeNode) -> int:
     return good_nodes
 
 
-def good_nodes_recursive(self, root: TreeNode) -> int:
+def good_nodes_recursive(root: TreeNode) -> int:
     """Count number of good nodes in a Binary Tree.
 
-    :param root: [description]
+    :param root: Root of the Binary Tree
     :type root: TreeNode
-    :return: [description]
+    :return: Number of good nodes
     :rtype: int
     """
     # Inner function for recursive call.
