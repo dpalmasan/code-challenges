@@ -115,4 +115,39 @@ algoritmo ZigZag-Traversal:
   return result
 ```
 
+## Nodos "Buenos" en un Árbol Binario [#31][i31]
+
+La solución de este problema es fácil de visibilizar si se piensa de forma recursiva. Lo que debemos hacer en simples términos, es guardar el valor máximo visto desde la raíz hasta un nodo `n` y propagar dicho valor a los descendientes. Si se cumple la condición de que el valor del nodo `n` es mayor que el máximo visto en el camino desde la raíz hasta dicho nodo, entonces actualizar el conteo de nodos buenos. Posteriormente, se deben visitar los hijos a la izquierda y derecha del nodo actual y seguir hasta llegar a los nodos hojas o hasta haber explorado todos los caminos posibles desde `n`. El procedimiento se muestra en la siguiente animación:
+
+![Alt text](https://gist.githubusercontent.com/dpalmasan/103d61ae06cfd3e7dee7888b391c1792/raw/7545e3d69882e0e22bf5f09ecc51c24bde99fa04/good_nodes.gif "Good Nodes")
+
+Dicho procedimiento es simple de implementar con un algoritmo recursivo. Cabe destacar que también se puede hacer utilizando una `stack`, al menos en las soluciones en `python` se muestran ambas posibilidades. Vamos a requerir dos métodos:
+
+* `visit_node` (llamada recursiva)
+* `count_good_nodes`
+
+```
+algoritmo visit_nodes:
+  entradas: node, max_seen
+  salida: good_node_count
+
+  if node == null: return 0
+
+  cnt = 0
+  if node.val >= max_seen:
+    cnt += 1
+
+  return cnt
+    + visit_nodes(node.left, max(max_seen, node.val))
+    + visit_nodes(node.right, max(max_seen, node.val))
+
+
+algoritmo count_good_nodes:
+  entrada: root
+  salida: Cantidad de nodos buenos
+
+  return visit_nodes(root, root.val)
+```
+
 [i11]: https://github.com/dpalmasan/code-challenges/issues/11
+[i31]: https://github.com/dpalmasan/code-challenges/issues/31
