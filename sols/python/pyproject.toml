@@ -27,6 +27,19 @@ python = "^3.8"
 [tool.poetry.dev-dependencies]
 pytest = "^6.2.5"
 pre-commit = "^2.15.0"
+pytest-cov = "^3.0.0"
+
+[tool.coverage.run]
+branch = true
+source = ["code_challenges"]
+
+[tool.pytest.ini_options]
+minversion = "6.0.0rc1"
+# Always using Coverage.py disables debugging.
+addopts = "--cov=code_challenges --cov-fail-under=70 -ra -v"
+testpaths = [
+  "tests",
+]
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
