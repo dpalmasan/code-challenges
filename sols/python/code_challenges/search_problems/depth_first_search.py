@@ -198,3 +198,87 @@ class WordSearchRecursive:
             visited[cols * i + j + 1] = False
 
         return False
+
+
+class MaxAreaOfIslandProblem:
+    """Max area of island problem."""
+
+    def max_area_of_island(self, grid: List[List[int]]) -> int:
+        """Get the max area of an island given a grid of 0's and 1's.
+
+        :param grid: Grid representing the map.
+        :type grid: List[List[int]]
+        :return: Area of the largest island.
+        :rtype: int
+        """
+        max_area = 0
+        visited = [False] * (len(grid) * len(grid[0]))
+        for i, row in enumerate(grid):
+            for j, cell in enumerate(row):
+                area = 0
+                if not visited[len(grid[0]) * i + j] and cell == 1:
+                    area = self.dfs(grid, i, j, visited, 0)
+                max_area = max(max_area, area)
+        return max_area
+
+    def valid_move(
+        self, grid: List[List[int]], i: int, j: int, visited: List[bool]
+    ) -> bool:
+        """Check whether a move is valid or not.
+
+        For a move to be valid, the position (i, j) must be in
+        the limits of the grid, and the cell at position (i, j)
+        should not be marked as visited, and the cell should
+        contain land.
+
+        :return: True if move is valid, False otherwise.
+        :rtype: bool
+        """
+        rows = len(grid)
+        cols = len(grid[0])
+        return (
+            0 <= i < rows
+            and 0 <= j < cols
+            and grid[i][j] == 1
+            and not visited[cols * i + j]
+        )
+
+    def dfs(
+        self,
+        grid: List[List[int]],
+        i: int,
+        j: int,
+        visited: List[bool],
+        area: int,
+    ) -> int:
+        """Depth-first-search step to compute area of an island.
+
+        :param grid: Grid representing island.
+        :type grid: List[List[int]]
+        :param i: Cell's row
+        :type i: int
+        :param j: Cell's colum
+        :type j: int
+        :param visited: Visited cells
+        :type visited: List[bool]
+        :param area: Current area found
+        :type area: int
+        :return: Total area of visited cells.
+        :rtype: int
+        """
+        visited[len(grid[0]) * i + j] = True
+        area += 1
+
+        if self.valid_move(grid, i - 1, j, visited):
+            area = self.dfs(grid, i - 1, j, visited, area)
+
+        if self.valid_move(grid, i + 1, j, visited):
+            area = self.dfs(grid, i + 1, j, visited, area)
+
+        if self.valid_move(grid, i, j - 1, visited):
+            area = self.dfs(grid, i, j - 1, visited, area)
+
+        if self.valid_move(grid, i, j + 1, visited):
+            area = self.dfs(grid, i, j + 1, visited, area)
+
+        return area
