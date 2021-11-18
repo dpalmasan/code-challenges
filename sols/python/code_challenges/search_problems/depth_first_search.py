@@ -282,3 +282,96 @@ class MaxAreaOfIslandProblem:
             area = self.dfs(grid, i, j + 1, visited, area)
 
         return area
+
+
+class FloodFillProblem:
+    """Solution for the flood fill problem."""
+
+    def floodFill(
+        self, image: List[List[int]], sr: int, sc: int, newColor: int
+    ) -> List[List[int]]:
+        """Return modified image with the new color.
+
+        :param image: Grid representing image
+        :type image: List[List[int]]
+        :param sr: Starting row
+        :type sr: int
+        :param sc: Starting column
+        :type sc: int
+        :param newColor: New color for ``(sr, sc)``
+        :type newColor: int
+        :return: Modified grid with propagated ``newColor``
+        :rtype: List[List[int]]
+        """
+        color = image[sr][sc]
+        self.dfs(image, sr, sc, color, newColor)
+        return image
+
+    def isNeighbor(
+        self,
+        image: List[List[int]],
+        sr: int,
+        sc: int,
+        color: int,
+        newColor: int,
+    ) -> bool:
+        """Check if a given coordinate is a neighbor.
+
+        A neighboring cell is only a neighbor if it is the same color as
+        the adjacent cell.
+
+        :param image: Grid of colors
+        :type image: List[List[int]]
+        :param sr: Row position
+        :type sr: int
+        :param sc: Col position
+        :type sc: int
+        :param color: Old color
+        :type color: int
+        :param newColor: newColor
+        :type newColor: int
+        :return: True if it is a neighbor, False otherwise
+        :rtype: bool
+        """
+        rows = len(image)
+        cols = len(image[0])
+        return (
+            0 <= sr < rows
+            and 0 <= sc < cols
+            and image[sr][sc] == color
+            and image[sr][sc] != newColor
+        )
+
+    def dfs(
+        self,
+        image: List[List[int]],
+        sr: int,
+        sc: int,
+        color: int,
+        newColor: int,
+    ):
+        """Depth first search to propagate newColor.
+
+        :param image: Grid of colored cells
+        :type image: List[List[int]]
+        :param sr: Row position
+        :type sr: int
+        :param sc: Col position
+        :type sc: int
+        :param color: Current color
+        :type color: int
+        :param newColor: New color
+        :type newColor: int
+        """
+        image[sr][sc] = newColor
+        if self.isNeighbor(image, sr - 1, sc, color, newColor):
+            self.dfs(image, sr - 1, sc, color, newColor)
+
+        if self.isNeighbor(image, sr + 1, sc, color, newColor):
+            self.dfs(image, sr + 1, sc, color, newColor)
+
+        if self.isNeighbor(image, sr, sc - 1, color, newColor):
+            self.dfs(image, sr, sc - 1, color, newColor)
+
+        if self.isNeighbor(image, sr, sc + 1, color, newColor):
+            self.dfs(image, sr, sc + 1, color, newColor)
