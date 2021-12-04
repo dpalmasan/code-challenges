@@ -8,16 +8,6 @@ class MaxSubarrayDivideAndConquer:
     def cross_sum(self, nums: List[int], low: int, high: int, mid: int) -> int:
         """Compute the maximum sum of a subarray passing through the middle.
 
-        Input: nums = [5,4,-1,7,8]
-        Output: 23
-
-        Input: nums = [1]
-        Output: 1
-
-        Input: nums = [-2,1,-3,4,-1,2,1,-5,4]
-        Output: 6
-        Explanation: [4,-1,2,1] has the largest sum = 6.
-
         This is ``O(n)`` in complexity.
 
         :param nums: List of numbers
@@ -72,7 +62,7 @@ class MaxSubarrayDivideAndConquer:
         cross_sum = self.cross_sum(nums, low, high, mid)
         return max(left_sum, right_sum, cross_sum)
 
-    def maxSubArray(self, nums: List[int]) -> int:
+    def max_sub_array(self, nums: List[int]) -> int:
         """Implement a divide and conquer solution.
 
         This algorithm is ``O(nlog(n))`` and it is based on the idea of
